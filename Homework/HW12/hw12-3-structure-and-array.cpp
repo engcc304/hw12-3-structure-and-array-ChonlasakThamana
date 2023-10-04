@@ -42,3 +42,65 @@
 */
 
 //TODO: #21 output money should in decimal format (eg. 120,200,340.42).
+#include <stdio.h>
+
+int main() {
+    char choice;
+    int totalSalary = 0, maxDuration = 0;
+    float averageSalary = 0;
+    char maxName[100];
+    float maxSalary = 0;
+    
+    int n = 0;
+    
+    do {
+        printf("Do you want to Enter Employee Information? (y/n) : ");
+        scanf(" %c", &choice);
+        
+        if (choice == 'n') {
+            break;
+        }
+        else if (choice == 'y') {
+            char name[100];
+            float salary;
+            int duration;
+            
+            printf("Employee Name : ");
+            scanf(" %s", name);
+            
+            printf("Salary (Bath/Month) : ");
+            scanf("%f", &salary);
+            
+            printf("Duration (Year) : ");
+            scanf("%d", &duration);
+            
+            totalSalary += salary;
+            
+            if (duration > maxDuration) {
+                maxDuration = duration;
+                maxSalary = salary;
+                strcpy(maxName, name);
+            }
+            
+            n++;
+        }
+        else {
+            printf("Invalid input. Please enter 'y' or 'n'.\n");
+        }
+    } while (choice != 'n');
+    
+    if (n > 0) {
+        averageSalary = (float)totalSalary / n;
+        
+        printf("\nAverage of Salary : %.2f Bath\n", averageSalary);
+        printf("Payment of every month : %.2f Bath\n", (float)totalSalary);
+        printf("----------------------------------------\n");
+        printf("** Most duration in this business **\n");
+        printf("Name : %s (%d Years)\n", maxName, maxDuration);
+        printf("Salary : %.2f Bath\n", maxSalary);
+    } else {
+        printf("No employee information entered.\n");
+    }
+    
+    return 0;
+}
